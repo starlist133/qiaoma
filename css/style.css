@@ -86,19 +86,20 @@ body{
 
 .center{
   grid-area:center;display:grid;gap:4px;min-height:0;
-  max-width:820px;width:100%;margin:auto;
+  max-width:820px;width:100%;height:100%;margin:0 auto;
   grid-template-columns:auto minmax(0,1fr) auto;
-  grid-template-rows:auto auto auto;
+  /* 上下弃牌区各占一份剩余空间，牌桌不留大片空白 */
+  grid-template-rows:minmax(0,1fr) auto minmax(0,1fr);
   grid-template-areas:
     "dn dn dn"
     "dw info de"
     "ds ds ds";
 }
-.discard{display:flex;flex-wrap:wrap;gap:3px;align-content:flex-start;min-height:24px}
-.dnorth{grid-area:dn;justify-content:center;max-height:112px;overflow:hidden}
-.dsouth{grid-area:ds;justify-content:center;max-height:112px;overflow:hidden}
-.dwest{grid-area:dw;width:84px;align-content:center}
-.deast{grid-area:de;width:84px;justify-content:flex-end;align-content:center}
+.discard{display:flex;flex-wrap:wrap;gap:3px;align-content:flex-start;min-height:24px;overflow:hidden}
+.dnorth{grid-area:dn;justify-content:center;align-content:flex-start}
+.dsouth{grid-area:ds;justify-content:center;align-content:flex-end}
+.dwest{grid-area:dw;width:92px;align-content:center}
+.deast{grid-area:de;width:92px;justify-content:flex-end;align-content:center}
 .cinfo{
   grid-area:info;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
   color:#eaf3ec;text-align:center;
@@ -148,7 +149,7 @@ body{
   border-color:#0f4d33;
 }
 .tile.sm{--tw:27px}
-.tile.xs{--tw:24px}
+.tile.xs{--tw:26px}
 .tile.wild{box-shadow:0 0 0 2px #e6bd54 inset, 0 1px 2px rgba(0,0,0,.3)}
 .tile.wild:after{
   content:"搭";position:absolute;top:0;right:1px;
