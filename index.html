@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>上海敲麻 · 百搭版</title>
+<meta name="description" content="上海敲麻（百搭版）在线模拟：四人局，你 vs 3 个 AI。含敲牌报听、百搭、花数番数计分、抢杠与荒番。">
+<meta name="theme-color" content="#175a3c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23fdf9ee'/%3E%3Ctext x='50' y='50' font-size='68' text-anchor='middle' dominant-baseline='central'%3E%F0%9F%80%84%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <div class="brand">上海敲麻<span class="sub">百搭版</span></div>
+    <div class="hud">
+      <span class="chip">第 <b id="hudRound">1</b> 局</span>
+      <span class="chip">庄 <b id="hudDealer">—</b></span>
+      <span class="chip">剩 <b id="hudWall">0</b> 张</span>
+      <span class="chip wild" id="hudWildBox">百搭 <b id="hudWild">—</b></span>
+      <span class="chip warn" id="hudHuang" hidden>荒番 ×2</span>
+      <span class="chip warn" id="hudKaiBao" hidden>开宝 ×2</span>
+    </div>
+    <div class="topActions">
+      <button class="btn ghost" id="btnRules">规则</button>
+      <button class="btn ghost" id="btnSettings">设置</button>
+      <button class="btn" id="btnNew">重开一局</button>
+    </div>
+  </header>
+
+  <div class="table" id="table">
+    <div class="seat north" id="seat2"></div>
+    <div class="seat west" id="seat3"></div>
+    <div class="center">
+      <div class="discard dnorth" id="disc2"></div>
+      <div class="discard dwest" id="disc3"></div>
+      <div class="cinfo" id="centerInfo"></div>
+      <div class="discard deast" id="disc1"></div>
+      <div class="discard dsouth" id="disc0"></div>
+    </div>
+    <div class="seat east" id="seat1"></div>
+    <div class="seat south" id="seat0"></div>
+  </div>
+
+  <div class="bottombar">
+    <div class="tipbar" id="tipBar">正在发牌…</div>
+    <div class="actionbar" id="actionBar"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+<div class="modal" id="modal" hidden><div class="modalCard" id="modalCard"></div></div>
+
+<script src="js/tiles.js"></script>
+<script src="js/hand.js"></script>
+<script src="js/score.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/game.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>
