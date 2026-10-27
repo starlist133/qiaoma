@@ -331,7 +331,13 @@
 
   async function applyClaim(c, discarder, tile) {
     var st = Game.state, q = c.player, dec = c.dec;
-    if (dec.type === 'hu') { await doHu(q, discarder.seat, false, false, tile); return; }
+    if (dec.type === 'hu') {
+      // 胡的牌从弃牌堆取走，避免重复显示
+      var hi = discarder.discards.lastIndexOf(tile);
+      if (hi >= 0) discarder.discards.splice(hi, 1);
+      await doHu(q, discarder.seat, false, false, tile);
+      return;
+    }
     // 从弃牌堆取走该牌
     var di = discarder.discards.lastIndexOf(tile);
     if (di >= 0) discarder.discards.splice(di, 1);
@@ -433,6 +439,13 @@
   /* -------------------- 胡牌结算 -------------------- */
   async function doHu(p, loserSeat, gangKai, qiangGang, winTile) {
     var st = Game.state;
+    // 点炮 / 抢杠：胡的那张牌并入手牌，保证计分与展示都是完整 14 张
+    // 注意：必须无条件 push —— 手牌里可能已有同码牌（如百搭），不能用 indexOf 判断
+    if (winTile != null) {
+      p.hand.push(winTile);
+      sortHand(p);
+      p.drawn = null;
+    }
     var res = Score.compute({
       hand: p.hand.slice(), melds: p.melds.slice(), flowers: p.flowers.slice(),
       wildCode: st.wildCode, selfDraw: loserSeat == null, gangKai: gangKai,

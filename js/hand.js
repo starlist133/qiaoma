@@ -54,9 +54,17 @@
    */
   function canWin(counts, wildCode, fixedMelds, tripletsOnly) {
     var need = 4 - fixedMelds;
-    if (need <= 0) return false;
     var total = 0, i;
     for (i = 0; i < N; i++) total += counts[i];
+
+    // 四副露：手牌只剩将牌 2 张（大吊车形态）
+    if (need === 0) {
+      if (total !== 2) return false;
+      if (wildTotalOf(counts, wildCode) >= 1) return true;  // 百搭必成将
+      for (i = 0; i < N; i++) if (counts[i] === 2) return true;
+      return false;
+    }
+    if (need < 0) return false;
     if (total !== need * 3 + 2) return false;
 
     var wt = wildTotalOf(counts, wildCode);
@@ -83,9 +91,20 @@
   function winningTiles(counts, wildCode, fixedMelds) {
     var res = [];
     var need = 4 - fixedMelds;
-    if (need <= 0) return res;
     var total = 0, i;
     for (i = 0; i < N; i++) total += counts[i];
+
+    // 四副露单吊：手上剩 1 张，听与它相同的牌；若是百搭则任意牌都可
+    if (need === 0) {
+      if (total !== 1) return res;
+      for (i = 0; i < N; i++) {
+        if (counts[i] !== 1) continue;
+        if (i === wildCode) { for (var t2 = 0; t2 < N; t2++) res.push(t2); }
+        else res.push(i);
+      }
+      return res;
+    }
+    if (need < 0) return res;
     if (total !== need * 3 + 1) return res; // 13/10/7/4/1 张时才是听牌形态
     for (var t = 0; t < N; t++) {
       var c = counts.slice();

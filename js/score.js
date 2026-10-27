@@ -29,7 +29,8 @@
       qingyise: qing,
       hunyise: hun && !qing,
       pengpenghu: pph,
-      daDiao: melds.length === 4 && hand.length === 1
+      // 大吊车：4 副露后单吊将。胡牌张已并入手牌，故手牌恰为 2 张
+      daDiao: melds.length === 4 && hand.length === 2 && melds.every(function (ml) { return ml.type !== 'chi'; })
     };
   }
 
@@ -99,8 +100,7 @@
     /* ---- 番数 ---- */
     var types = analyzeTypes(hand, melds, wildCode);
     var fans = [];
-    var menqing = melds.every(function (ml) { return ml.type === 'angang' || ml.type === 'peng' ? false : (ml.type === 'angang'); }) || melds.length === 0;
-    menqing = !melds.some(function (ml) { return ml.type === 'chi' || ml.type === 'peng' || ml.type === 'gang'; });
+    var menqing = !melds.some(function (ml) { return ml.type === 'chi' || ml.type === 'peng' || ml.type === 'gang'; });
     if (menqing) fans.push({ name: '门清', fan: 1 });
     if (types.daDiao) fans.push({ name: '大吊车', fan: 1 });
     if (ctx.gangKai) fans.push({ name: '杠开', fan: 1 });

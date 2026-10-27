@@ -335,12 +335,24 @@
         var wh = card.querySelector('.winHand');
         var st = Game.state;
         var hand = r.hand.slice().sort(function (a, b) { return a - b; });
-        hand.forEach(function (t) { wh.appendChild(tileEl(t, '', st.wildCode)); });
-        if (r.winTile != null && r.hand.indexOf(r.winTile) < 0) {
-          var sep = document.createElement('div');
-          sep.style.cssText = 'width:8px';
-          wh.appendChild(sep);
-          wh.appendChild(tileEl(r.winTile, 'wintile', st.wildCode));
+        // 胡的那张牌高亮（点炮/抢杠时它已在手牌中）
+        var hi = (r.winTile == null) ? -1 : hand.lastIndexOf(r.winTile);
+        hand.forEach(function (t, idx) {
+          wh.appendChild(tileEl(t, idx === hi ? 'wintile' : '', st.wildCode));
+        });
+        // 副露（碰/杠/吃）一并展示，避免只看 11 张造成困惑
+        if (r.melds && r.melds.length) {
+          var gap = document.createElement('div');
+          gap.className = 'winGap';
+          wh.appendChild(gap);
+          r.melds.forEach(function (ml) {
+            var g = document.createElement('div');
+            g.className = 'winMeld';
+            var ts = ml.tiles || [ml.code, ml.code, ml.code];
+            ts.forEach(function (t) { g.appendChild(tileEl(t, 'sm', st.wildCode)); });
+            g.title = ({ peng: '碰', gang: '明杠', angang: '暗杠', chi: '吃' }[ml.type] || '副露') + ' ' + Tiles.tileName(ml.code);
+            wh.appendChild(g);
+          });
         }
         // 番
         var fl = card.querySelector('#fanList');

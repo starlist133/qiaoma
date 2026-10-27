@@ -156,6 +156,11 @@ body{
   font-family:"PingFang SC",sans-serif;
 }
 .tile.wintile{box-shadow:0 0 0 2px #d9a63c, 0 3px 8px rgba(0,0,0,.3);transform:translateY(-3px)}
+.tile.wintile:before{
+  content:"胡";position:absolute;top:0;left:1px;
+  font-size:calc(var(--tw)*0.28);font-weight:700;color:#c0392b;
+  font-family:"PingFang SC",sans-serif;
+}
 .tile.pick{cursor:pointer;transition:transform .12s, box-shadow .12s}
 .tile.pick:hover{transform:translateY(-8px);box-shadow:0 8px 14px rgba(0,0,0,.35)}
 .tile.dim{opacity:.45}
@@ -235,8 +240,14 @@ body{
 .modalCard .row:last-child{border-bottom:0}
 .modalCard .row .v{font-variant-numeric:tabular-nums;font-weight:700}
 .modalFoot{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
-.winHand{display:flex;flex-wrap:wrap;gap:3px;padding:10px 0}
+.winHand{display:flex;flex-wrap:wrap;gap:3px;padding:10px 0;align-items:flex-end}
 .winHand .tile{--tw:34px}
+.winGap{width:12px}
+.winMeld{
+  display:flex;gap:1px;padding:3px;border-radius:5px;
+  background:rgba(23,90,60,.07);border:1px solid rgba(23,90,60,.14);
+}
+.winMeld .tile{--tw:26px}
 .scoreTable{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
 .scoreTable th,.scoreTable td{padding:7px 6px;text-align:left;border-bottom:1px solid #ece6d4}
 .scoreTable th{font-weight:600;color:#6b7570;font-size:12px}
