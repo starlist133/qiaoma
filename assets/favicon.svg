@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="上海敲麻">
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#fffef8"/>
+      <stop offset="0.72" stop-color="#f7f4e8"/>
+      <stop offset="1" stop-color="#ece7d5"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="4" width="52" height="56" rx="11" fill="url(#tile)" stroke="#175a3c" stroke-width="3"/>
+  <rect x="12.5" y="10.5" width="39" height="43" rx="7" fill="none" stroke="#d9b45f" stroke-width="1.6" opacity="0.85"/>
+  <g fill="none" stroke="#b3282d" stroke-width="3.2" stroke-linecap="round">
+    <rect x="22" y="19" width="20" height="26" rx="1.5"/>
+    <path d="M32 19v26"/>
+    <path d="M22 32h20"/>
+  </g>
+</svg>
